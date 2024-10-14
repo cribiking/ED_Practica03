@@ -1,9 +1,29 @@
-import com.sun.security.jgss.GSSUtil;
+import java.util.List;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println("Pene polla");
-        System.out.println("Tonto el que lo lea");
+
+    }
+
+
+    public static <E extends Symbol> boolean comprovarExpressio(List<E> list) {
+
+        Stack<E> stack = new ArrayStack<E>();
+
+        for (E symbol : list) {
+            if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
+                stack.push(symbol);
+            } else if (symbol instanceof ClosingClaudators || symbol instanceof ClosingParentesi) {
+                if (stack.isEmpty()) {
+                    return false; // No hay un símbolo abierto correspondiente
+                }
+                stack.pop(); // Se encuentra un símbolo cerrado, eliminar el abierto
+            }
+        }
+
+        return stack.isEmpty(); // Devuelve true si todos los símbolos están balanceados
     }
 }
+
+
