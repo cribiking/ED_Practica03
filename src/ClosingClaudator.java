@@ -1,2 +1,2 @@
-public class ClosingClaudators extends Symbol {
+public class ClosingClaudator extends Symbol {
 }
