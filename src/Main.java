@@ -1,31 +1,40 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
+        //Crearem una serie de proves per així poder guiar-nos
+        //1. creació de arrays
+        testCase_1();//true
+        testCase_2();//false
     }
 
     //REFERENCIA: https://stackoverflow.com/questions/322715/when-to-use-linkedlist-over-arraylist-in-java#:~:text=LinkedList%20is%20fast%20for%20appending,to%20delete%20in%20the%20middle.
     public static <E extends Symbol> boolean comprovarExpressio(List<E> list) { //List és genèric
 
+        Pila pila = new Pila();
         LinkedList<E> stack = new LinkedList<E>(); //Linked perque O(1) when index = 0 or index = list.size() - 1
 
         //TODO: Fer que et digui quin element falta
         for (E symbol : list) {
-            if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) { //Si trobem un element que obre
-                stack.push(symbol); //TODO: si afegeix sempre al principi (addFirst), els que tanquen poden estar en ordre diferent, no? Potser millor addLast, no?
+
+            if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
+                //stack.push(symbol);
+                pila.push(symbol);
             } else if (symbol instanceof ClosingClaudator || symbol instanceof ClosingParentesi) {
-                if (stack.isEmpty()) {
-                    return false; // No hay un símbolo abierto correspondiente
+                if (pila.isEmpty()) {
+                    return false;
+                    /*
+                     No hay un símbolo abierto correspondiente
+                     Si el primer elemento es cerrado, retorna false directe
+                    */
                 }
+                //TODO falta aquest metode a la pila
                 stack.pop(); // Se encuentra un símbolo cerrado, eliminar el abierto
             }
         }
 
-        return stack.isEmpty(); // Devuelve true si todos los símbolos están balanceados
+        return pila.isEmpty(); // Devuelve true si todos los símbolos están balanceados
     }
 
     public static void testCase_1() {
@@ -43,9 +52,47 @@ public class Main {
         System.out.println("Test case 1");
         System.out.println("-------");
 
-        for (Symbol simbol : simbols) { //TODO: Why this is giving me an error?
-            System.out.println(simbol.toString());
+        for (int i = 0; i < simbols.size(); i++){
+            System.out.println(simbols.get(i).toString());
         }
+
+//        for (Symbol simbol : simbols) { //TODO: Why this is giving me an error?
+//        }
+
+        System.out.println("--------");
+
+        if (comprovarExpressio(simbols)) {
+            System.out.println("Resultat: Expressió correcte");
+            System.out.println("-------");
+        } else {
+            System.out.println("Resultat: Expressió incorrecte");
+            System.out.println("-------");
+        }
+    }
+
+    public static void testCase_2() { //Error
+
+        ArrayList simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
+        OpenParentesi openParentesi = new OpenParentesi();
+        ClosingParentesi closeParentesi = new ClosingParentesi();
+        OpenClaudator openClaudator = new OpenClaudator();
+        ClosingClaudator closeClaudator = new ClosingClaudator();
+
+        simbols.add(openParentesi);
+        simbols.add(closeClaudator);
+        simbols.add(openClaudator);
+        simbols.add(closeClaudator);
+        simbols.add(closeParentesi);
+
+        System.out.println("Test case 2");
+        System.out.println("-------");
+
+        for (int i = 0; i < simbols.size(); i++){
+            System.out.println(simbols.get(i).toString());
+        }
+
+//        for (Symbol simbol : simbols) { //TODO: Why this is giving me an error?
+//        }
 
         System.out.println("--------");
 
