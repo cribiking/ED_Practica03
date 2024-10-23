@@ -13,14 +13,13 @@ public class Main {
     public static <E extends Symbol> boolean comprovarExpressio(List<E> list) { //List és genèric
 
         Pila pila = new Pila();
-        LinkedList<E> stack = new LinkedList<E>(); //Linked perque O(1) when index = 0 or index = list.size() - 1
 
         //TODO: Fer que et digui quin element falta
         for (E symbol : list) {
 
             if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
-                //stack.push(symbol);
                 pila.push(symbol);
+
             } else if (symbol instanceof ClosingClaudator || symbol instanceof ClosingParentesi) {
                 if (pila.isEmpty()) {
                     return false;
@@ -29,8 +28,11 @@ public class Main {
                      Si el primer elemento es cerrado, retorna false directe
                     */
                 }
-                //TODO falta aquest metode a la pila
-                stack.pop(); // Se encuentra un símbolo cerrado, eliminar el abierto
+                pila.pop();
+                /*
+                Se encuentra un símbolo cerrado, eliminar el abierto
+                Retornara un objecte, i el farem servir per saber que eliminem
+                 */
             }
         }
 
@@ -38,7 +40,9 @@ public class Main {
     }
 
     public static void testCase_1() {
+
         ArrayList simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
+
         OpenParentesi openParentesi = new OpenParentesi();
         ClosingParentesi closeParentesi = new ClosingParentesi();
         OpenClaudator openClaudator = new OpenClaudator();

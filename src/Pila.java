@@ -1,28 +1,32 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.PrimitiveIterator;
 
 public class Pila implements InterfaceStack {
-    private final LinkedList<Object> stack = new LinkedList<Object>();
-    private final ListIterator<Object> l_it = stack.listIterator();
+    private int size = 0;
+    private LinkedList<Object> stack = new LinkedList<Object>();
+    private ListIterator<Object> l_it = stack.listIterator();
     @Override
     public void push(Object element) {
         stack.add(element);
     }
     @Override
     public Object pop() {
-        return null;
+        Object obj = stack.getLast();
+        stack.removeLast(); //Com que utilitzem linkedList no dona problemes amb el tamany
+        return obj;
     }
-
     @Override
     public int getSize() {
-        return 0;
-    }
+        size = 0;
+        for (Object e : stack){
+            size++;
+        }
+        return size;
 
+    }
     @Override
     public boolean isEmpty() {
-        //stack.isEmpty();
-        while (l_it.hasNext()){
+        if (getSize() == 0 || stack == null) {
             return true;
         }
         return false;
