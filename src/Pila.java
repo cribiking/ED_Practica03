@@ -21,7 +21,6 @@ public class Pila implements InterfaceStack {
             size++;
         }
         return size;
-
     }
     @Override
     public boolean isEmpty() {
