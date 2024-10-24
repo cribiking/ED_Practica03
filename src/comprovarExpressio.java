@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class comprovarExpressio {
@@ -5,7 +6,7 @@ public class comprovarExpressio {
 
         Pila pila = new Pila();
 
-        for (E symbol : list) {
+        for (Object symbol : list) {
             if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
                 pila.push(symbol);
                 System.out.println("S'ha afegit un "+symbol+" , buscant parella...");
@@ -21,4 +22,40 @@ public class comprovarExpressio {
         }
         return pila.isEmpty(); // Retornarà true si tots els elements coincideixen
     }
+
+    //Crearem 2 métodes que crein els valors de les llistes que volem comprovar
+    public static ArrayList generateList1 () {
+
+        ArrayList simbols = new ArrayList<>();
+        OpenParentesi openParentesi = new OpenParentesi();
+        ClosingParentesi closeParentesi = new ClosingParentesi();
+        OpenClaudator openClaudator = new OpenClaudator();
+        ClosingClaudator closeClaudator = new ClosingClaudator();
+
+        simbols.add(openParentesi);
+        simbols.add(openClaudator);
+        simbols.add(closeClaudator);
+        simbols.add(closeParentesi);
+
+        return simbols;
+    }
+    public static ArrayList generateList2 () {
+
+        ArrayList simbols = new ArrayList<>();
+        OpenParentesi openParentesi = new OpenParentesi();
+        ClosingParentesi closeParentesi = new ClosingParentesi();
+        OpenClaudator openClaudator = new OpenClaudator();
+        ClosingClaudator closeClaudator = new ClosingClaudator();
+
+        simbols.add(openParentesi);
+        simbols.add(closeClaudator);
+        simbols.add(openClaudator);
+        simbols.add(closeClaudator);
+        simbols.add(closeParentesi);
+
+        return simbols;
+    }
+
+
+
 }

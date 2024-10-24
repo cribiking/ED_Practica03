@@ -11,7 +11,7 @@ public class Main {
         testCase_2();//false
 
         //Exercici 2 - Simulador de cues
-        simuladorDeCues();
+        //simuladorDeCues();
 
     }
 
@@ -100,16 +100,16 @@ public class Main {
         }
     }
 
-    public static void simuladorDeCues() {
-
-        ListCua<Client> cuaCine = new ListCua<>();
-        ArrayList caixers = new ArrayList();
-
-        for(int i = 0; i < NUM_CLIENTS; i++){
-            cuaCine.inserir(new Client());
-        }
-
-    }
+//    public static void simuladorDeCues() {
+//
+//        ListCua<Client> cuaCine = new ListCua<>();
+//        ArrayList caixers = new ArrayList();
+//
+//        for(int i = 0; i < NUM_CLIENTS; i++){
+//            cuaCine.inserir(new Client());
+//        }
+//
+//    }
 }
 
 
