@@ -1,11 +1,18 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
 
+    public static final int NUM_CLIENTS = 100;
+
+
+    public static void main(String[] args) {
+        //Exercici 1 - Tokenizer
         testCase_1();//true
         testCase_2();//false
+
+        //Exercici 2 - Simulador de cues
+        simuladorDeCues();
+
     }
 
     //REFERENCIA: https://stackoverflow.com/questions/322715/when-to-use-linkedlist-over-arraylist-in-java#:~:text=LinkedList%20is%20fast%20for%20appending,to%20delete%20in%20the%20middle.
@@ -91,6 +98,17 @@ public class Main {
             System.out.println("Resultat: Expressió incorrecte");
             System.out.println("-------");
         }
+    }
+
+    public static void simuladorDeCues() {
+
+        ListCua<Client> cuaCine = new ListCua<>();
+        ArrayList caixers = new ArrayList();
+
+        for(int i = 0; i < NUM_CLIENTS; i++){
+            cuaCine.inserir(new Client());
+        }
+
     }
 }
 
