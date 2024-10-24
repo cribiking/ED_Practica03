@@ -10,11 +10,11 @@ public class NodeLlista<T> {
         LinkedList<T> cua = new LinkedList<>();
     };
 
-    public void enqueue(T element) {
-        if(cua.isEmpty()){
-            Node<T> = cua.
-        }
-    };
+//    public void enqueue(T element) {
+//        if(cua.isEmpty()){
+//            Node<T> = cua.
+//        }
+//    };
 
     public T dequeue() {
         return null;

@@ -4,7 +4,6 @@ import java.util.ListIterator;
 public class Pila implements InterfaceStack {
     private int size = 0;
     private LinkedList<Object> stack = new LinkedList<Object>();
-    private ListIterator<Object> l_it = stack.listIterator();
     @Override
     public void push(Object element) {
         stack.add(element);

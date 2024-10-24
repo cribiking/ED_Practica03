@@ -3,8 +3,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        //Crearem una serie de proves per així poder guiar-nos
-        //1. creació de arrays
+
         testCase_1();//true
         testCase_2();//false
     }
@@ -14,31 +13,22 @@ public class Main {
 
         Pila pila = new Pila();
 
-        //TODO: Fer que et digui quin element falta
         for (E symbol : list) {
-
             if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
                 pila.push(symbol);
-
+                System.out.println("S'ha afegit un "+symbol+" , buscant parella...");
             } else if (symbol instanceof ClosingClaudator || symbol instanceof ClosingParentesi) {
+                //No hi ha un símbol obert corresponent.
+                //Si el primer element ás tancat, retorna false directe
                 if (pila.isEmpty()) {
                     return false;
-                    /*
-                     No hay un símbolo abierto correspondiente
-                     Si el primer elemento es cerrado, retorna false directe
-                    */
                 }
                 pila.pop();
-                /*
-                Se encuentra un símbolo cerrado, eliminar el abierto
-                Retornara un objecte, i el farem servir per saber que eliminem
-                 */
+                //Es troba un simbol tancat, eliminem l'obert de la pila
             }
         }
-
-        return pila.isEmpty(); // Devuelve true si todos los símbolos están balanceados
+        return pila.isEmpty(); // Retornarà true si tots els elements coincideixen
     }
-
     public static void testCase_1() {
 
         ArrayList simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
@@ -56,12 +46,9 @@ public class Main {
         System.out.println("Test case 1");
         System.out.println("-------");
 
-        for (int i = 0; i < simbols.size(); i++){
-            System.out.println(simbols.get(i).toString());
+        for (Object elem : simbols) {
+            System.out.println(elem.toString());
         }
-
-//        for (Symbol simbol : simbols) { //TODO: Why this is giving me an error?
-//        }
 
         System.out.println("--------");
 
@@ -74,7 +61,7 @@ public class Main {
         }
     }
 
-    public static void testCase_2() { //Error
+    public static void testCase_2() {
 
         ArrayList simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
         OpenParentesi openParentesi = new OpenParentesi();
@@ -91,12 +78,9 @@ public class Main {
         System.out.println("Test case 2");
         System.out.println("-------");
 
-        for (int i = 0; i < simbols.size(); i++){
-            System.out.println(simbols.get(i).toString());
+        for (Object simbol : simbols) {
+            System.out.println(simbol.toString());
         }
-
-//        for (Symbol simbol : simbols) { //TODO: Why this is giving me an error?
-//        }
 
         System.out.println("--------");
 
