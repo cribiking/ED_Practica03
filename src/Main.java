@@ -107,7 +107,7 @@ public class Main {
 
         ListCua<Client> cuaCine;
         ArrayList<Client> caixers;
-        Client clientAux = null;
+        Client clientAux;
 
         int temps;
         int tempsMitja;
@@ -123,34 +123,34 @@ public class Main {
             numClients = NUM_CLIENTS;
 
 
-            for(int n = 0; n < i+1; n++){
-                caixers.add(new Client(temps));
-                numClients--;
-            }
+//            for(int n = 0; n < i+1; n++){
+//                caixers.add(new Client(temps));
+//                numClients--;
+//            }
 
             while(numClients != 0){
 
-                if(temps % TEMPS_ARRIBADA == 0 && numClients > 0){
+                if(temps % TEMPS_ARRIBADA == 0){
                     cuaCine.inserir(new Client(temps));
-                    numClients--;
                 }
 
-                if (temps % TEMPS_CLIENT == 0) {
+                if(temps != 0 && temps % TEMPS_CLIENT == 0){
                     for(int j = 0; j <= i; j++){
-                        caixers.getFirst().setSortida(temps);
-
-                        tempsMitja += caixers.getFirst().tempsTotalCua();
-
-                        caixers.removeFirst();
-                        caixers.addFirst(cuaCine.treure());
+                        clientAux = cuaCine.treure();
+                        caixers.add(clientAux);
+                        caixers.getLast().setSortida(temps);
+                        numClients--;
+                        tempsMitja += caixers.getLast().tempsTotalCua();
+                        caixers.removeLast();
                     }
+                    //System.out.println("Temps espera client " + (NUM_CLIENTS - numClients) + ": " + clientAux.tempsTotalCua());
                 }
 
                 temps++;
 
             }
 
-            System.out.println("Nombre de caixers: " + (i+1) + " - Temps mitjà en ser atesos (en segons): " + tempsMitja);
+            System.out.println("Nombre de caixers: " + (i+1) + " - Temps mitjà en ser atesos (en segons): " + tempsMitja/NUM_CLIENTS);
 
         }
 
