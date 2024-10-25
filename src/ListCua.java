@@ -51,11 +51,11 @@ public class ListCua<T> implements CuaInterface<T>{
         } else {
             aux = front.element;
             front = front.next;
-            front.previous = null;
-        }
 
-        if(front == null){ //Quan el front és NULL, vol dir que ja no tenim elements en la llista
-            back = null;
+            if (front == null) {
+                back = null;
+            }
+
         }
 
         return aux;

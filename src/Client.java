@@ -12,14 +12,6 @@ public class Client {
         this.sortida = sortida;
     }
 
-    public void setTaquilla(int taquilla) {
-        this.taquilla = taquilla;
-    }
-
-    public int getTaquilla() {
-        return taquilla;
-    }
-
     public int tempsTotalCua(){
         return sortida - arribada;
     }

@@ -105,32 +105,52 @@ public class Main {
 
     public static void simuladorDeCues() {
 
-        ListCua<Client> cuaCine = new ListCua<>();
-        boolean[] caixers = new boolean[NUM_CAIXERS];
-        Client clientAux;
+        ListCua<Client> cuaCine;
+        ArrayList<Client> caixers;
+        Client clientAux = null;
 
-        int temps = 0;
-        int tempsMitja = 0;
-        int numClients = NUM_CLIENTS;
-        int ultimCaixer = 0;
+        int temps;
+        int tempsMitja;
+        int numClients;
 
-        for(int i = 0; i < caixers.length; i++){
-            while(numClients != 0){
-                if(temps % TEMPS_ARRIBADA == 0){
-                    cuaCine.inserir(new Client(temps));
-                }
+        for(int i = 0; i < NUM_CAIXERS; i++){
+            cuaCine = new ListCua<>();
+            caixers = new ArrayList<Client>();
 
-                if(temps != 0 && temps % TEMPS_CLIENT == 0){
-                    clientAux = cuaCine.treure();
-                    clientAux.setSortida(temps);
-                    numClients--;
-                    tempsMitja += clientAux.tempsTotalCua();
-                    //System.out.println("Temps espera client " + (NUM_CLIENTS - numClients) + ": " + clientAux.tempsTotalCua());
-                }
-                temps++;
+            tempsMitja = 0;
+            temps = 0;
+
+            numClients = NUM_CLIENTS;
+
+
+            for(int n = 0; n < i+1; n++){
+                caixers.add(new Client(temps));
+                numClients--;
             }
 
-            System.out.println("Nombre de caixers: " + i + " - Temps mitjà en ser atesos (en segons): " + tempsMitja/NUM_CLIENTS);
+            while(numClients != 0){
+
+                if(temps % TEMPS_ARRIBADA == 0 && numClients > 0){
+                    cuaCine.inserir(new Client(temps));
+                    numClients--;
+                }
+
+                if (temps % TEMPS_CLIENT == 0) {
+                    for(int j = 0; j <= i; j++){
+                        caixers.getFirst().setSortida(temps);
+
+                        tempsMitja += caixers.getFirst().tempsTotalCua();
+
+                        caixers.removeFirst();
+                        caixers.addFirst(cuaCine.treure());
+                    }
+                }
+
+                temps++;
+
+            }
+
+            System.out.println("Nombre de caixers: " + (i+1) + " - Temps mitjà en ser atesos (en segons): " + tempsMitja);
 
         }
 
