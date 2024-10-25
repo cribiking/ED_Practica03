@@ -3,12 +3,14 @@ import java.util.*;
 public class Main {
 
     public static final int NUM_CLIENTS = 100;
+    public static final int TEMPS_CLIENT = 150;
+    public static final int TEMPS_ARRIBADA = 15;
 
 
     public static void main(String[] args) {
         //Exercici 1 - Tokenizer
-        testCase_1();//true
-        testCase_2();//false
+        //testCase_1();//true
+        //testCase_2();//false
 
         //Exercici 2 - Simulador de cues
         simuladorDeCues();
@@ -104,10 +106,27 @@ public class Main {
 
         ListCua<Client> cuaCine = new ListCua<>();
         ArrayList caixers = new ArrayList();
+        Client clientAux;
 
-        for(int i = 0; i < NUM_CLIENTS; i++){
-            cuaCine.inserir(new Client());
+        int temps = 0;
+        int tempsMitja = 0;
+        int numClients = NUM_CLIENTS;
+
+        while(numClients != 0){
+            if(temps % 15 == 0){
+                cuaCine.inserir(new Client(temps));
+            }
+            if(temps != 0 && temps % 120 == 0){
+                clientAux = cuaCine.treure();
+                clientAux.setSortida(temps);
+                numClients--;
+                tempsMitja += clientAux.tempsTotalCua();
+                //System.out.println("Temps espera client " + (NUM_CLIENTS - numClients) + ": " + clientAux.tempsTotalCua());
+            }
+            temps++;
         }
+
+        System.out.println("Temps mitjà 1 taquilla: " + tempsMitja/NUM_CLIENTS);
 
     }
 }
