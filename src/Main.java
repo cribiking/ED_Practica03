@@ -112,6 +112,7 @@ public class Main {
         int temps;
         int tempsMitja;
         int numClients;
+        int numCaixers;
 
         for(int i = 0; i < NUM_CAIXERS; i++){
             cuaCine = new ListCua<>();
@@ -123,25 +124,23 @@ public class Main {
             numClients = NUM_CLIENTS;
 
 
-//            for(int n = 0; n < i+1; n++){
-//                caixers.add(new Client(temps));
-//                numClients--;
-//            }
-
-            while(numClients != 0){
+            while(numClients > 0){
 
                 if(temps % TEMPS_ARRIBADA == 0){
                     cuaCine.inserir(new Client(temps));
+                    if(caixers.size() != i+1){
+                        caixers.add(cuaCine.treure());
+                    }
                 }
 
+                numCaixers = caixers.size();
+
                 if(temps != 0 && temps % TEMPS_CLIENT == 0){
-                    for(int j = 0; j <= i; j++){
-                        clientAux = cuaCine.treure();
-                        caixers.add(clientAux);
-                        caixers.getLast().setSortida(temps);
+                    while(!caixers.isEmpty()){
+                        caixers.getFirst().setSortida(temps);
+                        tempsMitja += caixers.getFirst().tempsTotalCua();
+                        caixers.removeFirst();
                         numClients--;
-                        tempsMitja += caixers.getLast().tempsTotalCua();
-                        caixers.removeLast();
                     }
                     //System.out.println("Temps espera client " + (NUM_CLIENTS - numClients) + ": " + clientAux.tempsTotalCua());
                 }
