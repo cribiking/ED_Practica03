@@ -3,8 +3,9 @@ import java.util.*;
 public class Main {
 
     public static final int NUM_CLIENTS = 100;
-    public static final int TEMPS_CLIENT = 150;
+    public static final int TEMPS_CLIENT = 120;
     public static final int TEMPS_ARRIBADA = 15;
+    public static final int NUM_CAIXERS = 10;
 
 
     public static void main(String[] args) {
@@ -105,28 +106,33 @@ public class Main {
     public static void simuladorDeCues() {
 
         ListCua<Client> cuaCine = new ListCua<>();
-        ArrayList caixers = new ArrayList();
+        boolean[] caixers = new boolean[NUM_CAIXERS];
         Client clientAux;
 
         int temps = 0;
         int tempsMitja = 0;
         int numClients = NUM_CLIENTS;
+        int ultimCaixer = 0;
 
-        while(numClients != 0){
-            if(temps % 15 == 0){
-                cuaCine.inserir(new Client(temps));
+        for(int i = 0; i < caixers.length; i++){
+            while(numClients != 0){
+                if(temps % TEMPS_ARRIBADA == 0){
+                    cuaCine.inserir(new Client(temps));
+                }
+
+                if(temps != 0 && temps % TEMPS_CLIENT == 0){
+                    clientAux = cuaCine.treure();
+                    clientAux.setSortida(temps);
+                    numClients--;
+                    tempsMitja += clientAux.tempsTotalCua();
+                    //System.out.println("Temps espera client " + (NUM_CLIENTS - numClients) + ": " + clientAux.tempsTotalCua());
+                }
+                temps++;
             }
-            if(temps != 0 && temps % 120 == 0){
-                clientAux = cuaCine.treure();
-                clientAux.setSortida(temps);
-                numClients--;
-                tempsMitja += clientAux.tempsTotalCua();
-                //System.out.println("Temps espera client " + (NUM_CLIENTS - numClients) + ": " + clientAux.tempsTotalCua());
-            }
-            temps++;
+
+            System.out.println("Nombre de caixers: " + i + " - Temps mitjà en ser atesos (en segons): " + tempsMitja/NUM_CLIENTS);
+
         }
-
-        System.out.println("Temps mitjà 1 taquilla: " + tempsMitja/NUM_CLIENTS);
 
     }
 }
