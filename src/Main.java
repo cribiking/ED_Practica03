@@ -10,11 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
         //Exercici 1 - Tokenizer
-        //testCase_1();//true
+        testCase_1();//true
         //testCase_2();//false
 
         //Exercici 2 - Simulador de cues
-        simuladorDeCues();
+        //simuladorDeCues();
 
     }
 

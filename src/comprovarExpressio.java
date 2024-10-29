@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class comprovarExpressio {
+public class comprovarExpressio<E extends Symbol> {
     public static <E extends Symbol> boolean comprovarExpressio(List<E> list) { //List és genèric
 
         Pila pila = new Pila();
 
-        for (Object symbol : list) {
+        for (E symbol : list) {
             if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
                 pila.push(symbol);
                 System.out.println("S'ha afegit un "+symbol+" , buscant parella...");
