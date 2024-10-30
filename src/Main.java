@@ -26,7 +26,7 @@ public class Main {
         for (E symbol : list) {
             if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
                 pila.push(symbol);
-                System.out.println("S'ha afegit un "+ symbol.getSymbolType() +" , buscant parella...");
+                System.out.println("S'ha afegit un "+ symbol.getSymbolType() +" a la pila , buscant parella...");
             } else if (symbol instanceof ClosingClaudator || symbol instanceof ClosingParentesi) {
                 //No hi ha un símbol obert corresponent.
                 //Si el primer element ás tancat, retorna false directe
@@ -57,7 +57,7 @@ public class Main {
         System.out.println("Test case 1");
         System.out.println("-------");
 
-        System.out.println("Símbols creats:");
+        System.out.print("Símbols creats:");
         for (Symbol elem : simbols) {
             System.out.print(elem.getSymbolType());
         }
@@ -71,6 +71,8 @@ public class Main {
             System.out.println("Resultat: Expressió incorrecte");
             System.out.println("-------");
         }
+
+        System.out.println("\n\n");
     }
 
     public static void testCase_2() {
@@ -82,16 +84,16 @@ public class Main {
         ClosingClaudator closeClaudator = new ClosingClaudator();
 
         simbols.add(openParentesi);
-        simbols.add(closeClaudator);
         simbols.add(openClaudator);
+        simbols.add(openParentesi);
         simbols.add(closeClaudator);
         simbols.add(closeParentesi);
 
-        System.out.println("\n\n");
+
         System.out.println("Test case 2");
         System.out.println("-------");
 
-        System.out.println("Symbols Creats:");
+        System.out.print("Symbols Creats:");
         for (Symbol elem : simbols) {
             System.out.print(elem.getSymbolType());
         }
@@ -105,6 +107,8 @@ public class Main {
             System.out.println("Resultat: Expressió incorrecte");
             System.out.println("-------");
         }
+
+        System.out.println("\n\n");
     }
 
     public static void simuladorDeCues() {
