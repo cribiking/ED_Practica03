@@ -1,11 +1,10 @@
 import java.util.LinkedList;
 
-public class Pila <E extends Symbol> implements InterfaceStack {
+public class Pila <E extends Symbol> implements InterfaceStack<E> {
     private int size = 0;
     private LinkedList<E> stack = new LinkedList<>();
-
     @Override
-    public void push(Symbol element) {
+    public void push(E element) {
         stack.add(element);
     }
     @Override
