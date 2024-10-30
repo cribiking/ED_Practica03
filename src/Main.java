@@ -11,10 +11,10 @@ public class Main {
     public static void main(String[] args) {
         //Exercici 1 - Tokenizer
         testCase_1();//true
-        //testCase_2();//false
+        testCase_2();//false
 
         //Exercici 2 - Simulador de cues
-        //simuladorDeCues();
+        simuladorDeCues();
 
     }
 
@@ -26,7 +26,7 @@ public class Main {
         for (E symbol : list) {
             if (symbol instanceof OpenClaudator || symbol instanceof OpenParentesi) {
                 pila.push(symbol);
-                System.out.println("S'ha afegit un "+symbol+" , buscant parella...");
+                System.out.println("S'ha afegit un "+ symbol.getSymbolType() +" , buscant parella...");
             } else if (symbol instanceof ClosingClaudator || symbol instanceof ClosingParentesi) {
                 //No hi ha un símbol obert corresponent.
                 //Si el primer element ás tancat, retorna false directe
@@ -38,10 +38,11 @@ public class Main {
             }
         }
         return pila.isEmpty(); // Retornarà true si tots els elements coincideixen
+
     }
     public static void testCase_1() {
 
-        ArrayList simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
+        ArrayList<Symbol> simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
 
         OpenParentesi openParentesi = new OpenParentesi();
         ClosingParentesi closeParentesi = new ClosingParentesi();
@@ -56,11 +57,12 @@ public class Main {
         System.out.println("Test case 1");
         System.out.println("-------");
 
-        for (Object elem : simbols) {
-            System.out.println(elem.toString());
+        System.out.println("Símbols creats:");
+        for (Symbol elem : simbols) {
+            System.out.print(elem.getSymbolType());
         }
 
-        System.out.println("--------");
+        System.out.println("\n--------");
 
         if (comprovarExpressio(simbols)) {
             System.out.println("Resultat: Expressió correcte");
@@ -73,7 +75,7 @@ public class Main {
 
     public static void testCase_2() {
 
-        ArrayList simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
+        ArrayList<Symbol> simbols = new ArrayList<>(); //ArrayList perque get(i) té un cost O(1);
         OpenParentesi openParentesi = new OpenParentesi();
         ClosingParentesi closeParentesi = new ClosingParentesi();
         OpenClaudator openClaudator = new OpenClaudator();
@@ -85,14 +87,16 @@ public class Main {
         simbols.add(closeClaudator);
         simbols.add(closeParentesi);
 
+        System.out.println("\n\n");
         System.out.println("Test case 2");
         System.out.println("-------");
 
-        for (Object simbol : simbols) {
-            System.out.println(simbol.toString());
+        System.out.println("Symbols Creats:");
+        for (Symbol elem : simbols) {
+            System.out.print(elem.getSymbolType());
         }
 
-        System.out.println("--------");
+        System.out.println("\n--------");
 
         if (comprovarExpressio(simbols)) {
             System.out.println("Resultat: Expressió correcte");
