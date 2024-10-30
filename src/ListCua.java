@@ -66,7 +66,13 @@ public class ListCua<T> implements CuaInterface<T>{
      * @return Element del primer node de la llista
      */
     public T getFront() {
-        return this.front.element;
+        T aux = null;
+
+        if(!isEmpty()){
+            return this.front.element;
+        }
+
+        return null;
     }
 
     /**

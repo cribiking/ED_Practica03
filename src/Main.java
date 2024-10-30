@@ -105,51 +105,43 @@ public class Main {
 
     public static void simuladorDeCues() {
 
-        ListCua<Client> cuaCine;
-        ArrayList<Client> caixers;
-        Client clientAux;
-
+        int numClients;
         int temps;
         int tempsMitja;
-        int numClients;
-        int numCaixers;
+        int tempsMitjaTotal = 0;
+
+        ListCua<Client> cuaClients;
+        int[] caixers;
+
+        //Si el temps d'arribada del client és menor que el temps del caixer, el caixer no pot acceptar al client
 
         for(int i = 0; i < NUM_CAIXERS; i++){
-            cuaCine = new ListCua<>();
-            caixers = new ArrayList<Client>();
-
-            tempsMitja = 0;
+            cuaClients = new ListCua<>();
+            caixers = new int[i + 1];
             temps = 0;
-
+            tempsMitja = 0;
             numClients = NUM_CLIENTS;
-
 
             while(numClients > 0){
 
                 if(temps % TEMPS_ARRIBADA == 0){
-                    cuaCine.inserir(new Client(temps));
-                    if(caixers.size() != i+1){
-                        caixers.add(cuaCine.treure());
-                    }
+                    cuaClients.inserir(new Client(temps));
                 }
 
-                numCaixers = caixers.size();
-
-                if(temps != 0 && temps % TEMPS_CLIENT == 0){
-                    while(!caixers.isEmpty()){
-                        caixers.getFirst().setSortida(temps);
-                        tempsMitja += caixers.getFirst().tempsTotalCua();
-                        caixers.removeFirst();
-                        numClients--;
-                    }
-                    //System.out.println("Temps espera client " + (NUM_CLIENTS - numClients) + ": " + clientAux.tempsTotalCua());
+                for(int n = 0; n < (i+1) && !cuaClients.isEmpty(); n++){
+                        if(caixers[n] <= temps){
+                            caixers[n] += TEMPS_CLIENT;
+                            tempsMitja += TEMPS_CLIENT + (temps - cuaClients.getFront().getArribada());
+                            cuaClients.treure();
+                            numClients--;
+                        }
                 }
 
                 temps++;
-
             }
 
-            System.out.println("Nombre de caixers: " + (i+1) + " - Temps mitjà en ser atesos (en segons): " + tempsMitja/NUM_CLIENTS);
+            tempsMitjaTotal += tempsMitja/NUM_CLIENTS;
+            System.out.println("Nombre de caixers: " + (i + 1) + " - Temps mitjà en ser atesos (en segons): " + tempsMitja/NUM_CLIENTS);
 
         }
 
