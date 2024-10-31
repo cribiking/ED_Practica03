@@ -116,7 +116,6 @@ public class Main {
         int numClients;
         int temps;
         int tempsMitja;
-        int tempsMitjaTotal = 0;
 
         ListCua<Client> cuaClients;
         int[] caixers;
@@ -130,9 +129,9 @@ public class Main {
             tempsMitja = 0;
             numClients = NUM_CLIENTS;
 
-            while(numClients > 0){
+            while(numClients > 0){ //Hem decidit fer-ho així perquè és una "simulació"
 
-                if(temps % TEMPS_ARRIBADA == 0){
+                if(temps % TEMPS_ARRIBADA == 0){ //Comptador circular
                     cuaClients.inserir(new Client(temps));
                 }
 
@@ -148,7 +147,6 @@ public class Main {
                 temps++;
             }
 
-            tempsMitjaTotal += tempsMitja/NUM_CLIENTS;
             System.out.println("Nombre de caixers: " + (i + 1) + " - Temps mitjà en ser atesos (en segons): " + tempsMitja/NUM_CLIENTS);
 
         }
