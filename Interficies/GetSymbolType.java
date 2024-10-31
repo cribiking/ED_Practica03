@@ -1,3 +1,5 @@
 public interface GetSymbolType {
-    public String getSymbolType();
+    default String getSymbolType() {
+        return null;
+    }
 }

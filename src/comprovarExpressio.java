@@ -26,7 +26,7 @@ public class comprovarExpressio<E extends Symbol> {
     //Crearem 2 métodes que crein els valors de les llistes que volem comprovar
     public static ArrayList generateList1 () {
 
-        ArrayList simbols = new ArrayList<>();
+        ArrayList<Symbol> simbols = new ArrayList<>();
         OpenParentesi openParentesi = new OpenParentesi();
         ClosingParentesi closeParentesi = new ClosingParentesi();
         OpenClaudator openClaudator = new OpenClaudator();
@@ -41,7 +41,7 @@ public class comprovarExpressio<E extends Symbol> {
     }
     public static ArrayList generateList2 () {
 
-        ArrayList simbols = new ArrayList<>();
+        ArrayList<Symbol> simbols = new ArrayList<>();
         OpenParentesi openParentesi = new OpenParentesi();
         ClosingParentesi closeParentesi = new ClosingParentesi();
         OpenClaudator openClaudator = new OpenClaudator();
